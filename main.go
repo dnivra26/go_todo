@@ -2,12 +2,24 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
 
 func sayhelloName(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello world!") // send data to client side
+	response, err := http.Get("http://time-service")
+	if err != nil {
+		fmt.Printf("%s", err)
+	} else {
+		defer response.Body.Close()
+		contents, err := ioutil.ReadAll(response.Body)
+		if err != nil {
+			fmt.Printf("%s", err)
+		}
+		fmt.Fprintf(w, "Hello world!"+string(contents)) // send data to client side
+	}
+
 }
 
 func main() {

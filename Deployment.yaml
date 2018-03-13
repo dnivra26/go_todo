@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: todo
-        image: gcr.io/cattolica-poc/go-todo:v2
+        image: gcr.io/cattolica-poc/go-todo:v3
         ports:
         - containerPort: 9090
